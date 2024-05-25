@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Bags</h2>
+<ul>
+    {% for bag in bags %}
+    <li>
+        <a href="{{ url_for('view_bag', bag_id=bag.id) }}">{{ bag.name }}</a>
+        <a href="{{ url_for('delete_bag', bag_id=bag.id) }}" onclick="return confirm('Are you sure?')">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

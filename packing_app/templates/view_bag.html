@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ bag.name }}</h2>
+<a href="{{ url_for('create_item', bag_id=bag.id) }}">Add Item</a>
+<ul>
+    {% for item in bag.items %}
+    <li>
+        <input type="checkbox" onclick="location.href='{{ url_for('toggle_item', item_id=item.id) }}'" {% if item.packed %}checked{% endif %}>
+        {{ item.name }}
+        <a href="{{ url_for('delete_item', item_id=item.id) }}" onclick="return confirm('Are you sure?')">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+<p>Total packed: {{ bag.items|selectattr('packed', 'equalto', True)|list|length }} / {{ bag.items|length }}</p>
+{% endblock %}
